@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Любишь меня?</title>
+    <style>
+        /* Основные стили для страницы */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            transition: background 1s;
+        }
+
+        /* Контейнер для меню */
+        .menu-container {
+            text-align: center;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Стили для кнопок */
+        .menu-container button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .yes-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .no-button {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .yes-button:hover {
+            background-color: #45a049;
+        }
+
+        .no-button:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Сообщение после нажатия на "Нет" */
+        .message {
+            font-size: 24px;
+            color: white;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* Фон с дождём */
+        .sad-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #3a3a3a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Анимация дождя */
+        .rain {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            animation: fall 1s infinite linear;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Меню -->
+    <div class="menu-container">
+        <h1>Любишь меня?</h1>
+        <button class="yes-button" onclick="noAction()">Да</button>
+        <button class="no-button" onclick="showSadMessage()">Нет</button>
+        <div class="message">Я так и знал, спасибо за свою честность</div>
+    </div>
+
+    <!-- Фон с дождём -->
+    <div class="sad-background" id="sadBackground" style="display: none;">
+        <!-- Элементы дождя -->
+    </div>
+
+    <script>
+        function noAction() {
+            alert("Эта кнопка не работает.");
+        }
+
+        function showSadMessage() {
+            // Показать сообщение
+            document.querySelector('.message').style.display = 'block';
+
+            // Изменить фон и показать дождь
+            document.body.style.backgroundColor = '#3a3a3a';
+            const sadBackground = document.getElementById('sadBackground');
+            sadBackground.style.display = 'flex';
+
+            // Создать эффект дождя
+            for (let i = 0; i < 100; i++) {
+                const rainDrop = document.createElement('div');
+                rainDrop.classList.add('rain');
+                rainDrop.style.left = `${Math.random() * 100}vw`;
+                rainDrop.style.animationDuration = `${Math.random() * 0.5 + 0.5}s`;
+                sadBackground.appendChild(rainDrop);
+            }
+        }
+    </script>
+</body>
+</html>
